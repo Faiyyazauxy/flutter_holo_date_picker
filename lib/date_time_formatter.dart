@@ -112,6 +112,28 @@ class DateTimeFormatter {
     return result;
   }
 
+  /// Format datetime string for month
+  static String formatDateTimeForMonth(
+    int value,
+    String format,
+    DateTimePickerLocale locale,
+  ) {
+    if (format == null || format.length == 0) {
+      return value.toString();
+    }
+
+    String result = format;
+    // format year text
+    if (format.contains('y')) {
+      result = _formatYear(value, result, locale);
+    }
+    // format month text
+    if (format.contains('M')) {
+      result = _formatMonth(value, result, locale);
+    }
+    return result;
+  }
+
   /// Format day display
   static String formatDate(
       DateTime dateTime, String format, DateTimePickerLocale locale) {

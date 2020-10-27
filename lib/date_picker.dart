@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_holo_date_picker/widget/month_picker_widget.dart';
 
 import 'date_picker_theme.dart';
 import 'date_picker_constants.dart';
@@ -13,7 +14,6 @@ enum DateTimePickerMode {
   /// Display DateTimePicker
   datetime,
 }
-
 
 class DatePicker {
   /// Gets the right [DateTimePickerLocale] by a language string
@@ -139,6 +139,105 @@ class DatePicker {
       content: Container(
         width: 300,
         child: DatePickerWidget(
+          firstDate: firstDate,
+          lastDate: lastDate,
+          initialDate: initialDate,
+          dateFormat: dateFormat,
+          locale: locale,
+          pickerTheme: DateTimePickerTheme(
+            backgroundColor: backgroundColor,
+            itemTextStyle: TextStyle(color: textColor),
+          ),
+          onChange: ((DateTime date, list) {
+            _selectedDate = date;
+          }),
+          looping: looping,
+        ),
+      ),
+      actions: <Widget>[
+        FlatButton(
+          textColor: textColor,
+          child: Text(confirmText ?? "OK"),
+          onPressed: () {
+            Navigator.pop(context, _selectedDate);
+          },
+        ),
+        FlatButton(
+          textColor: textColor,
+          child: Text(cancelText ?? "Cancel"),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        )
+      ],
+    );
+    return showDialog(
+        useRootNavigator: false,
+        context: context,
+        builder: (context) => datePickerDialog);
+  }
+
+  /// Display month picker in bottom sheet.
+  ///
+  /// context: [BuildContext]
+  /// firstDate: [DateTime] minimum date time
+  /// lastDate: [DateTime] maximum date time
+  /// initialDateTime: [DateTime] initial date time for selected
+  /// dateFormat: [String] date format pattern
+  /// locale: [DateTimePickerLocale] internationalization
+  /// backgroundColor: [Color] background color of the dialog
+  /// itemTextStyle: [TextStyle] item TextStyle of the picker
+  /// titleText: [String] text of the dialog's title
+  /// confirmText: [String] text of the dialog's confirm button
+  /// cancelText: [String] text of the dialog's  cancel button
+  static Future<DateTime> showSimpleMonthPicker(
+    BuildContext context, {
+    DateTime firstDate,
+    DateTime lastDate,
+    DateTime initialDate,
+    String dateFormat,
+    DateTimePickerLocale locale: DATETIME_PICKER_LOCALE_DEFAULT,
+    Color backgroundColor,
+    Color textColor,
+    //TextStyle itemTextStyle,
+    String titleText,
+    String confirmText,
+    String cancelText,
+    bool looping: false,
+  }) {
+    DateTime _selectedDate = initialDate;
+
+    // handle the range of datetime
+    if (firstDate == null) {
+      firstDate = DateTime.parse(DATE_PICKER_MIN_DATETIME);
+    }
+    if (lastDate == null) {
+      lastDate = DateTime.parse(DATE_PICKER_MAX_DATETIME);
+    }
+
+    // handle initial DateTime
+    if (initialDate == null) {
+      initialDate = DateTime.now();
+    }
+
+    if (backgroundColor == null)
+      backgroundColor = DateTimePickerTheme.Default.backgroundColor;
+//    if (itemTextStyle == null)
+//      itemTextStyle = DateTimePickerTheme.Default.itemTextStyle;
+
+    if (textColor == null)
+      textColor = DateTimePickerTheme.Default.itemTextStyle.color;
+
+    var datePickerDialog = AlertDialog(
+      title: Text(
+        titleText ?? "Select Date",
+        style: TextStyle(color: textColor),
+      ),
+      contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 14),
+      backgroundColor: backgroundColor,
+      content: Container(
+        width: 300,
+        child: MonthPickerWidget(
           firstDate: firstDate,
           lastDate: lastDate,
           initialDate: initialDate,

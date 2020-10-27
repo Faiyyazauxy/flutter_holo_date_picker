@@ -30,12 +30,12 @@ class MyHomePage extends StatelessWidget {
           RaisedButton(
             child: Text("open picker dialog"),
             onPressed: () async {
-              var datePicked = await DatePicker.showSimpleDatePicker(
+              var datePicked = await DatePicker.showSimpleMonthPicker(
                 context,
                 initialDate: DateTime(1994),
                 firstDate: DateTime(1960),
-                lastDate: DateTime(2012),
-                dateFormat: "dd-MMMM-yyyy",
+                //lastDate: DateTime(2012),
+                dateFormat: "MMMM-yyyy",
                 locale: DateTimePickerLocale.en_us,
                 looping: true,
               );
