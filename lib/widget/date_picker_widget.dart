@@ -146,7 +146,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
 
   /// render the picker widget of year、month and day
   Widget _renderDatePickerWidget() {
-    List<Widget> pickers = List<Widget>();
+    List<Widget> pickers = [];
     List<String> formatArr =
         DateTimeFormatter.splitDateFormat(widget.dateFormat);
     formatArr.forEach((format) {
@@ -199,9 +199,13 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
                 onSelectedItemChanged: valueChanged,
                 looping: widget.looping,
                 children: List<Widget>.generate(
-                  valueRange.last - valueRange.first + 1, (index) =>
-                    _renderDatePickerItemComponent(
-                      valueRange.first + index, format, fontSize,),),
+                  valueRange.last - valueRange.first + 1,
+                  (index) => _renderDatePickerItemComponent(
+                    valueRange.first + index,
+                    format,
+                    fontSize,
+                  ),
+                ),
               ),
             ),
           ),

@@ -146,7 +146,7 @@ class _MonthPickerWidgetState extends State<MonthPickerWidget> {
 
   /// render the picker widget of year、month and day
   Widget _renderMonthPickerWidget() {
-    List<Widget> pickers = List<Widget>();
+    List<Widget> pickers = [];
     List<String> formatArr =
         DateTimeFormatter.splitDateFormat(widget.dateFormat);
     formatArr.forEach((format) {

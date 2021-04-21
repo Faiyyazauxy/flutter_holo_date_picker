@@ -155,15 +155,15 @@ class DatePicker {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
-          textColor: textColor,
+        TextButton(
+          style: TextButton.styleFrom(primary: textColor),
           child: Text(confirmText ?? "OK"),
           onPressed: () {
             Navigator.pop(context, _selectedDate);
           },
         ),
-        FlatButton(
-          textColor: textColor,
+        TextButton(
+          style: TextButton.styleFrom(primary: textColor),
           child: Text(cancelText ?? "Cancel"),
           onPressed: () {
             Navigator.pop(context);
@@ -254,15 +254,15 @@ class DatePicker {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
-          textColor: textColor,
+        TextButton(
+          style: TextButton.styleFrom(primary: textColor),
           child: Text(confirmText ?? "OK"),
           onPressed: () {
             Navigator.pop(context, _selectedDate);
           },
         ),
-        FlatButton(
-          textColor: textColor,
+        TextButton(
+          style: TextButton.styleFrom(primary: textColor),
           child: Text(cancelText ?? "Cancel"),
           onPressed: () {
             Navigator.pop(context);
@@ -352,7 +352,7 @@ class _DatePickerComponent extends StatelessWidget {
   final _DatePickerRoute route;
   final double _pickerHeight;
 
-  _DatePickerComponent({Key key, @required this.route, @required pickerHeight})
+  _DatePickerComponent({@required this.route, @required pickerHeight})
       : this._pickerHeight = pickerHeight;
 
   @override
