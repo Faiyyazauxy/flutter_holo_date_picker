@@ -105,6 +105,7 @@ class DatePicker {
     String confirmText,
     String cancelText,
     bool looping: false,
+    bool hideCancelButton: false,
   }) {
     DateTime _selectedDate = initialDate;
 
@@ -162,16 +163,20 @@ class DatePicker {
             Navigator.pop(context, _selectedDate);
           },
         ),
-        TextButton(
-          style: TextButton.styleFrom(primary: textColor),
-          child: Text(cancelText ?? "Cancel"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        Visibility(
+          visible: !hideCancelButton,
+          child: TextButton(
+            style: TextButton.styleFrom(primary: textColor),
+            child: Text(cancelText ?? "Cancel"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         )
       ],
     );
     return showDialog(
+        barrierDismissible: !hideCancelButton,
         useRootNavigator: false,
         context: context,
         builder: (context) => datePickerDialog);
@@ -204,6 +209,7 @@ class DatePicker {
     String confirmText,
     String cancelText,
     bool looping: false,
+    bool hideCancelButton: false,
   }) {
     DateTime _selectedDate = initialDate;
 
@@ -261,16 +267,20 @@ class DatePicker {
             Navigator.pop(context, _selectedDate);
           },
         ),
-        TextButton(
-          style: TextButton.styleFrom(primary: textColor),
-          child: Text(cancelText ?? "Cancel"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        Visibility(
+          visible: !hideCancelButton,
+          child: TextButton(
+            style: TextButton.styleFrom(primary: textColor),
+            child: Text(cancelText ?? "Cancel"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         )
       ],
     );
     return showDialog(
+        barrierDismissible: !hideCancelButton,
         useRootNavigator: false,
         context: context,
         builder: (context) => datePickerDialog);

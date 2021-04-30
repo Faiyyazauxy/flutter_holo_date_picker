@@ -38,6 +38,7 @@ class MyHomePage extends StatelessWidget {
                 dateFormat: "MMMM-yyyy",
                 locale: DateTimePickerLocale.en_us,
                 looping: true,
+                hideCancelButton: true,
               );
 
               final snackBar =
